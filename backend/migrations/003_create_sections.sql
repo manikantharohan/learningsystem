@@ -1,0 +1,10 @@
+CREATE TABLE IF NOT EXISTS sections (
+    id VARCHAR(36) PRIMARY KEY DEFAULT (UUID()),
+    subject_id VARCHAR(36) NOT NULL,
+    title VARCHAR(255) NOT NULL,
+    order_index INT NOT NULL DEFAULT 0,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    FOREIGN KEY (subject_id) REFERENCES subjects(id) ON DELETE CASCADE,
+    INDEX idx_subject_order (subject_id, order_index)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
